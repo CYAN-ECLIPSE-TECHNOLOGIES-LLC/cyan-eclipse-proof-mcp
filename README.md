@@ -33,9 +33,9 @@ python3 tools/make_keys.py   # local Herald seed key (keys/, 600) + pinned heral
 python3 server.py            # MCP over stdio
 python3 smoke.py             # stdio smoke
 python3 -m unittest discover tests   # 12 regression tests (bench shapes)
-python3 dogfood.py           # White Report reel dogfood -> dogfood_output/
+python3 dogfood.py           # White Report reel first-party -> dogfood_output/
 ```
-State: `$ECLIPSE_PROOF_STATE` or `./data`. Dogfood: HOUSE_REEL_V1 pinned template replaces chat approval inside the pipeline — owner approval becomes the Herald pin; posting rails unchanged.
+State: `$ECLIPSE_PROOF_STATE` or `./data`. First-party: HOUSE_REEL_V1 pinned template replaces chat approval inside the pipeline — owner approval becomes the Herald pin; posting rails unchanged.
 
 ## Not built / not claimed
 Live Resolve Studio adapter (needs D3 license), Premiere UXP (P1), Frame.io connector (P2, specced §10), Trace OTIO/AAF/EDL (P2), OCR/ASR extraction path in Print (embedded text track at P0; low-confidence fixtures fail closed).
