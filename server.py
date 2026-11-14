@@ -356,7 +356,9 @@ def main():
         line = line.strip()
         if not line: continue
         try: req = json.loads(line)
-        except Exception: continue
+        except Exception:
+            sys.stdout.write(json.dumps({"jsonrpc": "2.0", "id": None, "error": {"code": -32700, "message": "PARSE_ERROR"}}) + "\n"); sys.stdout.flush(); continue
+        if not isinstance(req, dict): continue
         method, rid = req.get("method"), req.get("id")
         if method == "initialize":
             res = {"protocolVersion": "2025-03-26", "serverInfo": {"name": "eclipse-proof", "version": "0.1.0"}, "capabilities": {"tools": {}}}
@@ -366,7 +368,7 @@ def main():
             p = req.get("params", {})
             try: out = dispatch(p.get("name"), p.get("arguments") or {})
             except Refusal as r: out = r.payload()
-            except Exception as e: out = {"refusal_code": "INTERNAL_GUARD", "detail": type(e).__name__, "brand": BRAND}
+            except Exception as e: out = {"refusal_code": "INTERNAL_GUARD", "detail": "INTERNAL_GUARD", "brand": BRAND}
             res = {"content": [{"type": "text", "text": json.dumps(out)}], "isError": "refusal_code" in out}
         else:
             res = {}
